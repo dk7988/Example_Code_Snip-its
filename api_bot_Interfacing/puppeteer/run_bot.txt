@@ -1,2 +1,0 @@
-node NeweggBot_3080\NeweggBot_3080.js
-node AmazonBot_3060ti\amazonbot.js
