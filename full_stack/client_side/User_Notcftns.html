@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/User_Notcftns_Sprt.js"></script>
+<script src="/DEV_db_support_file.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+  background-color: #111;
+}
+
+.sidenav {
+  height: 100%;
+  width: 225px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 3px 3px 3px 28px;
+  text-decoration: none;
+  font-size: 13px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav div:hover, a:hover {
+  color: #f1f1f1;
+  cursor: grabbing;
+}
+
+.main {
+  margin-left: 225px; /* Same as the width of the sidenav */
+}
+
+h2{
+	color:#818181;
+	margin-left:15px;
+}
+
+h2:hover{
+	color: #f1f1f1;
+	cursor: default;
+}
+
+table{
+    padding:7px;
+    /*max-width:600px;
+    width: 600px;*/
+}
+
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 13px;
+  max-width:300px;
+  /*width: 350px;*/
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd){
+    background-color:#cccac6;
+}
+
+tr:hover {
+    background-color:#424242;
+    color: #ddd;
+}
+
+th {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-align: left;
+  background-color:#818181;
+  color: #111;
+  
+}
+
+
+
+
+</style>
+</head>
+<body>
+<script>
+    window.onload = function() {
+        if(window.parent.usr_notes!=undefined&&window.parent.usr_notes!=null&&window.parent.usr_notes!=""){
+            usr_notes = window.parent.usr_notes;
+            manage_usr_nots();
+        }
+    }
+
+
+
+</script>
+</body>
+</html>
