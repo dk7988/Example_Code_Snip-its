@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<title>dialog_timeline_event</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/add_new_project_form_files/metro-black.css" type="text/css" />
+<script type="text/javascript" src="/add_new_project_form_files/jquery.min.js"></script>
+<script type="text/javascript" src="add_new_project_form_files/metro-black.js"></script>
+<!--<script src="/add_new_project_form_files/new_project_form_support_file.js"></script>-->
+<style>
+    a:hover {
+      background-color: rgb(200, 223, 231);
+    }
+    .middle_center {
+        margin: auto;
+        width: auto;
+        /*border: 3px solid black;*/
+        padding: 5px;
+        text-align: center;
+        /*overflow: auto;*/
+        /*max-width: 350px;*/
+    }
+    legend {
+        background-color: rgb(194, 189, 189);
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        color: black;
+        /*padding: 13px 6px;*/
+        }
+    h3{
+        border: none;
+        color: lightgray;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+    ul{
+        min-height: 150px;
+        max-height: 15px;
+    }
+</style>
+<head>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+    <script src="/Dev_Proj_dash_Timeline_Events_support.js"></script>
+</head>
+<!-- w3-theme-l5 -->
+<body class="middle_center" onload="load_event_dialog_pg()" >
+
+<!-- Page Container
+<div class="w3-container w3-content" style="max-width:600px;">
+<div>-->
+    <div id="evnt_info">
+    <div class="container" style="margin:5px auto;font-size: 18px;">
+        <div id="proj_info" class="w3-card w3-round w3-white" style="display:block">
+            <h1 id="evnt_nme" style="font-size:1.5em; text-align:center;"></h1>
+            <div class="w3-container" id="evnt_info_cntnr">
+                <p onclick="date_clicked()">Due Date: <span id="d_date"></span></p>
+                <p onclick="status_clicked()">Current Status: <span id="e_stat"></span></p>
+                <!--<p id="103"><i class="w3-margin-right w3-text-theme"></i>Customer Project Number:<br> _10004</p>
+                <p><i class="w3-margin-right w3-text-theme"></i>Project Type:<br> _10005</p>
+                <p><i class="w3-margin-right w3-text-theme"></i>Current Project Stage:<br> _10006</p>
+                <p><i class="w3-margin-right w3-text-theme"></i>Industrial Design Design Lead:<br> _10007</p>
+                <p><i class="w3-margin-right w3-text-theme"></i>Location of project:<br> _10008</p>
+                <p><button class="w3-button w3-block w3-theme-l4">Additional Info</button></p>-->
+            </div>
+            <div id="save_btn" class="w3-container w3-teal w3-padding-16 w3-hover-yellow"
+                    onclick="save_changes()" style="display:none" >
+                 <h4>Save Changes</h4>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!--4 block buttons w3-margin-bottom w3-row-padding   onclick="add_milestn()" -->
+    <div class="w3-row-padding w3-margin-bottom" id="mlestn_dialog_btns" >
+
+        <div class="w3-half">
+            <div class="w3-container w3-red w3-hover-grey" style="padding-bottom: 1px; padding-top: 1px;" 
+            onclick="turn_on_frm('add_proj_milestn_2_proj_dialog_frm')">
+                <h4>Add a<br>Milestone</h4>
+            </div>
+        </div>
+
+        <div class="w3-half">
+            <div class="w3-container w3-blue w3-hover-black" style="padding-bottom: 1px; padding-top: 1px;"
+            onclick="milestn_cmpltd()">
+                <h4>Milestone<br>Completed</h4>
+            </div>
+        </div>
+        <!--<div class="w3-quarter">
+            <div class="w3-container w3-teal w3-padding-16 w3-hover-yellow" onclick="close_dilg()">
+                 <h4>OK</h4>
+            </div>
+        </div>
+        <div class="w3-quarter">
+            <div class="w3-container w3-orange w3-text-white w3-padding-16 w3-hover-purple" onclick="close_dilg()">
+                <h4>Cancel</h4>
+            </div>
+        </div>-->
+    </div>
+    <!--4 block buttons-->
+    </div>
+
+
+
+
+<!--  max-width:480px;  -->
+<fieldset class="formoid-metro-black" id = 'add_proj_milestn_2_proj_dialog_frm'
+	style="background-color:darkgray;font-size:14px;font-family:'Open Sans',
+    'Helvetica Neue','Helvetica',Arial,Verdana,sans-serif;color:#666666;min-width:150px;text-align: left;">
+    <form onsubmit="return false">
+        <legend name='add_proj_milestn_2_proj_dialog_frm_lgnd' class="title">
+            <h2 name='add_proj_milestn_2_proj_dialog_frm_title'>Add Milestone to Project</h2>
+        </legend>
+
+        <div><h3 class="section-break-title">Milestone Info</h3><hr></div>
+
+        <div id="proj_milestn_opts_dialog_div" name="proj_milestn_opts_dialog_div" class="element-select" title="Select a milestone">
+            <label style="color:lightgray;" class="title">Milestone Name<span class="required">*</span></label>
+            <div class="large"><span>
+                <select name="proj_milestn_opts_dialog" required="required" onchange="check_usr_slctn('proj_milestn_opts_dialog')">
+                    <option>-- SELECT --</option>
+                    </select><i style="min-height: 150px; max-height: 14.7656px;"></i>
+            </span></div>
+        </div>
+
+        <div id="proj_milestn_stat_opts_dialog_div" name="proj_milestn_stat_opts_dialog_div" class="element-select" 
+            title="Select the current status of this milestone">
+            <label style="color:lightgray;" class="title">Milestone Status<span class="required">*</span></label>
+            <div class="large"><span>
+                <select name="proj_milestn_stat_opts_dialog" required="required"> <!--onchange="check_usr_slctn('custmr_poc_opts')">-->
+                    <option>-- SELECT --</option>
+                </select><i style="min-height: 150px; max-height: 14.7656px;"></i>
+            </span></div>
+        </div>
+
+        <div class="element-date">
+            <label style="color:lightgray;" class="title">Milestone Due Date</label>
+            <input class="large" data-format="mm-dd-yyyy" type="date" name="proj_milestn_dialog_due_date" required="required" placeholder="mm-dd-yyyy"/>
+        </div>
+
+        <div>
+            <button style='background-color:#5e5d5d;border-color:black;border-style:solid;color:whitesmoke;font-size:16px;'
+                   onclick="turn_on_main_form()">Go back</button>
+                   <!--value="Cancel"-->
+            <button style='background-color:#5e5d5d;border-color:black;border-style:solid;color:whitesmoke;font-size:16px;' 
+                    onclick="add_proj_milestn_2_proj_dialog_frm_data()">Add Milestone to Project</button>
+                    <!--value="Submit"-->
+        </div>
+    </form>
+</fieldset>
+
+<!--  max-width:480px;  -->
+<fieldset class="formoid-metro-black" id = 'new_proj_milestn_dialog_frm'
+    style="background-color:darkgray;font-size:14px;font-family:'Open Sans',
+    'Helvetica Neue','Helvetica',Arial,Verdana,sans-serif;color:#666666;min-width:150px;text-align: left;">
+    <form onsubmit="return false">
+        <legend name='new_proj_milestn_dialog_frm_lgnd' class="title">
+            <h2 name='new_proj_milestn_dialog_frm_title'>Add Milestone to System</h2>
+        </legend>
+        
+        <div><h3 class="section-break-title">New Milestone Info</h3><hr></div>
+
+        <div class="element-input" title="Enter the name of the new milestone">
+            <label style="color:lightgray;"class="title">New Milestone Name<span class="required">*</span></label>
+            <input name="new_milestn_nme_dialog" class="large" type="text" required="required" placeholder="Milestone Name"/>
+        </div>
+
+        <div>
+            <button style='background-color:#5e5d5d;border-color:black;border-style:solid;color:whitesmoke;font-size:16px;'
+                onclick="turn_on_main_form()">Go back</button>
+            <!--value="Cancel" onclick="turn_on_main_form('new_proj_milestn_dialog_frm')">Cancel</button>-->
+			<button style='background-color:#5e5d5d;border-color:black;border-style:solid;color:whitesmoke;font-size:16px;'
+                onclick="if(new_proj_milestn_dialog_frm_data()){turn_on_frm('add_proj_milestn_2_proj_dialog_frm')}">Add to Project</button>
+            <!-- value="Submit"  -->
+			<button style='background-color:#5e5d5d;border-color:black;border-style:solid;color:whitesmoke;font-size:16px;'
+                onclick="if(new_proj_milestn_dialog_frm_data()){turn_on_frm('evnt_info')}">Add to System</button>
+             <!-- value="Submit"  -->
+        </div>
+    </form>
+</fieldset>
+
+
+        
+<!-- End Page Container 
+</div>-->
+
+
+
+
+ 
+
+</body>
+</html> 
+

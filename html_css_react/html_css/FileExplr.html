@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<title>FILE EXPLR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+        <script src="./dialogs/dialog-modal.js"></script>
+        <script src="./dialogs/utils.js"></script>
+        <link rel="stylesheet" href="./dialogs/dialog.css" type="text/css" />
+        <link rel="stylesheet" href="./colors.css" type="text/css" />
+
+</head>
+<style>
+    td.req_tbl, th.req_tbl {
+        border: 1px solid rgb(190, 190, 190);
+        padding: 10px;
+    }
+
+    td.req_tbl {
+        text-align: center;
+    }
+
+    tr.req_tbl:nth-child(even) {
+        background-color: #eee;
+    }
+
+    th.req_tbl[scope="col"] {
+        background-color: #696969;
+        color: #fff;
+        text-align: center;
+    }
+
+    th.req_tbl[scope="row"] {
+        background-color: #d7d9f2;
+    }
+
+    caption.req_tbl {
+        padding: 10px;
+        caption-side: top;
+        text-align: center;
+    }
+
+    table.req_tbl {
+        border: 2px solid rgb(200, 200, 200);
+        letter-spacing: 1px;
+        font-family: sans-serif;
+        font-size: .8rem;
+        table-layout: fixed;
+    }
+    .dropbtn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+    }
+    
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .dropdown-content{
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .dropcntnt{
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown-content label {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropcntnt label {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .dropdown-content label:hover {background-color: #ddd;}
+
+    .dropcntnt label:hover {background-color: #ddd;}
+    
+    .dropdown:hover .dropdown-content {display: block;}
+    
+    .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+
+    td.tst_tbl {
+        border: 2px solid rgb(200, 200, 200);
+        letter-spacing: 1px;
+        font-family: sans-serif;
+        text-align: left;
+        font-size: .8rem;
+        table-layout: fixed;
+    }
+
+    tr.tst_tbl_h {
+        display: none;
+        visibility:hidden;
+    }
+
+    .progrs_row{
+        padding-top: 0.25%;
+        padding-bottom: 0.25%;
+        margin-top: 0.5%;
+        margin-bottom: 0.5%;
+    }
+
+    .progrs_row:hover{
+        margin-top: 1.5%;
+        margin-bottom: 1.5%;
+        background-color: #696969;
+        color: #fff;
+        font-size: 18px;
+    }
+
+</style>
+<body>
+        <script src="./DEV_index_support_file.js"></script>
+        <script src="./DEV_db_support_file.js"></script>
+        <script src="./FileExplr_Sprt_File.js"></script>
+   
+        
+        <div id="fleexplr_body" class="w3-responsive w3-margin-bottom ">
+            <div id="tbl_div" class="w3-responsive w3-half">
+                <table style="width: auto; height: auto;">
+                    <tr style="width: auto; height: auto;">
+                        <td style="width: auto; height: auto;">
+                            <div id="copy_paste_btns" >
+                                <div id="cpy_frm_btn" class="w3-half w3-padding">
+                                    <div class="w3-container w3-red w3-padding-16 w3-hover-black" onclick="frm_loc_slctd()">
+                                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                                        <div class="w3-right">
+                                            <h3 style="color: white"></h3>
+                                        </div>
+                                        <h4>Select as Copy location</h4>
+                                        <!--<h4>Select Scan Project to Copy</h4>-->
+                                        <!--<h4>Scan Project to Copy<br>(must be inside scan project)</h4>-->
+                                    </div>
+                                </div>
+                                <div id="pst_to_btn" class="w3-half w3-padding">
+                                    <div class="w3-container w3-orange w3-padding-16 w3-hover-brown" onclick="to_loc_slctd()">
+                                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                                        <div class="w3-right">
+                                            <h3 style="color: white"></h3>
+                                        </div>
+                                        <h4>Select as Paste location</h4>
+                                        <!--<h4>Select Where to Paste Scan Project</h4>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="width: auto; height: auto;">
+                        <td style="width: auto; height: auto;">
+                            <div id="nav_btns" >
+                                <div id="easy_nav_view_btn" class="w3-half w3-padding w3-2017-tawny-port-hover">
+                                    <div class="w3-container w3-2017-island-paradise w3-padding-16" onclick="turn_on_easy_nav()">
+                                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                                        <div class="w3-right">
+                                            <h3 style="color: white"></h3>
+                                        </div>
+                                        <h4>Easy Nav. View</h4>
+                                    </div>
+                                </div>
+                                <div id="file_brwsr_btn" class="w3-half w3-padding w3-2017-tawny-port-hover">
+                                    <div class="w3-container w3-2017-shaded-spruce w3-padding-16" onclick="turn_on_tbl_nav()">
+                                    <!--<div class="w3-container w3-2017-shaded-spruce w3-padding-16" onclick="turn_on_mangr_nav()">-->
+                                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                                        <div class="w3-right">
+                                            <h3 style="color: white"></h3>
+                                        </div>
+                                        <h4>Table View</h4>
+                                        <!--<h4>File Browser View</h4>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+           
+            
+            <div id="drive_btns" class="w3-left">
+                <div id="drv_0_btn" class=" w3-padding" onclick="use_drive('Laser_Scanning')">
+                    <div class="w3-container w3-2019-vanilla-custard w3-hover-purple" >
+                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 style="color: white"></h3>
+                        </div>
+                        <h4>ID_ROOT\Laser_Scanning</h4>
+                    </div>
+                </div>
+                <div id="drv_1_btn" class=" w3-padding" onclick="use_drive('drive 1')">
+                    <div class="w3-container w3-teal  w3-hover-blue" >
+                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 style="color: white"></h3>
+                        </div>
+                        <h4>drive 1</h4>
+                    </div>
+                </div>
+                <div id="drv_2_btn" class=" w3-padding w3-2018-martini-olive-hover" onclick="use_drive('drive 2')">
+                    <div class="w3-container w3-2018-valiant-poppy " >
+                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 style="color: white"></h3>
+                        </div>
+                        <h4>drive 2</h4>
+                    </div>
+                </div>
+                <div id="drv_3_btn" class=" w3-padding" onclick="use_drive('drive 3')">
+                    <div class="w3-container w3-gray w3-hover-green" >
+                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 style="color: white"></h3>
+                        </div>
+                        <h4>drive 3</h4>
+                    </div>
+                </div>
+                <div id="drv_4_btn" class="w3-padding w3-food-apple-hover" onclick="use_drive('drive 4')">
+                    <div class="w3-container w3-food-coffee" >
+                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 style="color: white"></h3>
+                        </div>
+                        <h4>drive 4</h4>
+                    </div>
+                </div>
+            </div>
+    
+
+            <div id="svr_fun_btns" class="w3-right ">
+                <div id="lk_4_drvs_btn" class=" w3-padding w3-2019-mango-mojito-hover" onclick="chk_4_new_drives()">
+                    <div class="w3-container w3-padding-16 w3-2019-galaxy-blue">
+                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 style="color: white"></h3>
+                        </div>
+                        <h4>Scan for additional drives</h4>
+                    </div>
+                </div>
+                <div id="upld_btn" class="w3-padding w3-2018-lime-punch-hover" onclick="copy_proj_docs('check~in')">
+                    <div class="w3-container w3-2019-aspen-gold w3-padding-16 " >
+                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 style="color: white"></h3>
+                        </div>
+                        <h4>Upload & Check In</h4>
+                    </div>
+                </div>
+                <div id="chk_out_scn_fldr_btn" class=" w3-padding w3-2017-butterum-hover" onclick="chk_out_scan_proj_fldr()">
+                    <div class="w3-container w3-2018-spring-crocus w3-padding-16" >
+                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 style="color: white"></h3>
+                        </div>
+                        <h4>Check Out Scan Project</h4>
+                    </div>
+                </div>
+                <div id="fx_scn_fldr_btn" class=" w3-padding w3-2019-sweet-lilac-hover" onclick="fix_scan_fldr()">
+                    <div class="w3-container w3-camo-light-green w3-padding-16" >
+                        <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 style="color: white"></h3>
+                        </div>
+                        <h4>Rename Scan Folder and Files</h4>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <div id="explr_mangr_body" class="w3-container ">
+            <!--<div id="explr_page_body" class="w3-container " style="padding-top:128px; padding-left: 25px; " >-->
+                <!--<div id="page_body" class="w3-container sidebar_active" >-->
+            
+        </div>
+
+
+
+        <div id="explr_easy_nav_body" class="w3-container ">
+
+            <!--<h4>Easy Nav. Viewer has been Selected</h4>-->
+            <h4 id='wt_msg'>Please wait, while the server crunches the data</h4>
+
+            <div id='the_div' style="display: none;">
+                <h4>Use the pull downs to select the campus, building, level, quadrant, and file type you want to request a copy of.</h4>
+                <div id="cmp_dpdn_div" class="dropdown">
+                    <button class="dropbtn">Select a Campus
+                        <label id='slctd_cmp' style="display: none;"></label>
+                    </button>
+                    <div id="cmp_dpdn" class="dropdown-content">
+                    </div>
+                </div>
+                
+                <div id="bld_dpdn_div" class="dropdown">
+                    <button class="dropbtn">Select a Building
+                        <label id='slctd_bld' style="display: none;"></label>
+                    </button>
+                    <div id="bld_dpdn" class="dropdown-content">
+                    </div>
+                </div>
+                <div id="lvl_dpdn_div" class="dropdown">
+                    <button class="dropbtn">Select a Level
+                        <label id='slctd_lev' style="display: none;"></label>
+                    </button>
+                    <div id="lvl_dpdn" class="dropdown-content">
+                    </div>
+                </div>
+                <div id="quad_dpdn_div" class="dropdown">
+                    <button class="dropbtn">Select a Quadrant
+                        <label id='slctd_qud' style="display: none;"></label>
+                    </button>
+                    <div id="quad_dpdn" class="dropdown-content">
+                    </div>
+                </div>
+                <div id="ft_dpdn_div" class="dropdown">
+                    <button class="dropbtn">Select a File Type
+                        <label id='slctd_ft' style="display: none;"></label>
+                    </button>
+                    <div id="ft_dpdn" class="dropdown-content">
+                    </div>
+                </div>
+                <div id="fd_rcp_div" class="dropdown">
+                    <button class="dropbtn" onclick="fd_rcp_fr_slctn()">Find RCP File for Selection
+                        <!--<label id='slctd_ft' style="display: none;"></label>-->
+                    </button>
+                    <div id="rcp_dpdn" class="dropdown-content">
+                    </div>
+                </div>
+                <div id="srch_rcp_div" class="dropdown">
+                    <button class="dropbtn" onclick="elm_on_off('srch_dpdn')">RCP Quadrant LookUp
+                    </button>
+                    <div id="srch_dpdn" class="dropcntnt" style="display: none;">
+                        <label id='srch_fd_lbl' >Enter an RCP file name to find which quadrants are in it</label>
+                        <input id='srch_fd' type="search"></input>
+                        <button id='srch_btn' class="dropbtn w3-right" onclick="srch_rcps()" >Search</button>
+                    </div>
+                </div>
+
+                <button id='reqst_btn' class="dropbtn w3-right" onclick="reqst_slctn()" style="display: none;">Request Selection</button>
+
+            </div>
+
+            <div id="rqu_tbl_div" class="w3-responsive w3-half">
+                <table id='req_tbl' style="width: auto; height: auto;">
+                </table>
+            </div>
+                                                                        <!-- w3-twothird-->
+            <div id="rcp_tbl_div" class="w3-responsive w3-half">
+                <table id='rcp_tbl' style="width: auto; height: auto;">
+                </table>
+            </div>
+
+            
+
+        </div>
+        
+
+        <div id="dwnld_sts_body" class="w3-container ">
+            <!--<div id="explr_page_body" class="w3-container " style="padding-top:128px; padding-left: 25px; " >-->
+                <!--<div id="page_body" class="w3-container sidebar_active" >-->
+            
+        </div>
+
+
+        <script>
+            window.onload = function() {
+                explr(function(nxt_pg){
+                //    fe_load_sub_page(nxt_pg,true,1);
+                    scan_actions();
+                    chk_4_new_drives();
+                    chk_pre_nav();
+                });
+            }
+        </script>
+    </body>
+</html> 
